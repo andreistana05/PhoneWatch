@@ -41,7 +41,7 @@ public class AlarmManager {
     private void setMaxVolume(){
         previousVolume = audioManager.getStreamVolume(AudioManager.STREAM_ALARM);
 
-        int maxVolume = audioManager.getStreamVolume(AudioManager.STREAM_ALARM);
+        int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
 
         audioManager.setStreamVolume(
                 AudioManager.STREAM_ALARM,
@@ -60,7 +60,7 @@ public class AlarmManager {
     private void startSound(){
         if (mediaPlayer != null)
             mediaPlayer.release();
-        mediaPlayer = mediaPlayer.create(context, R.raw.alarm);
+        mediaPlayer = MediaPlayer.create(context, R.raw.alarm);
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();

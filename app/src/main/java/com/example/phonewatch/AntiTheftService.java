@@ -18,6 +18,8 @@ public class AntiTheftService extends Service implements SensorEventListener{
     private Sensor gyroscope;
 
     private AlarmManager alarmManager;
+
+    private boolean isMonitoring = false;
     private static final float THRESHOLD_ACCEL = 2.5f; //pragul de miscare (m/s^2)
     private static final float THRESHOLD_GYRO = 0.8f; //pragul de rotatie initial (rad/s)
 
@@ -49,6 +51,8 @@ public class AntiTheftService extends Service implements SensorEventListener{
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        if(!isMonitoring)
+            return;
         if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
             handleAccelerometer(event);
         if(event.sensor.getType() == Sensor.TYPE_GYROSCOPE)
@@ -86,6 +90,22 @@ public class AntiTheftService extends Service implements SensorEventListener{
         Intent intent = new Intent(this, AlarmActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent != null) {
+            String action = intent.getAction();
+            if ("STOP_ALARM".equals(intent.getAction())) {
+                alarmManager.stopAlarm();
+            } else if ("START_MONITORING".equals(action)) {
+                isMonitoring = true;
+            } else if ("STOP_MONITORING".equals(action)) {
+                isMonitoring = false;
+                alarmManager.stopAlarm();
+            }
+        }
+        return START_STICKY;
     }
 
     @Override

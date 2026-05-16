@@ -9,8 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 public class AlarmActivity extends Activity{
-    private static final String CORRECT_PIN = "1234";
-    private AlarmManager alarmManager;
+    private PinManager pinManager;
     private EditText pinInput;
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -23,8 +22,7 @@ public class AlarmActivity extends Activity{
         );
 
         setContentView(R.layout.activity_alarm);
-
-        alarmManager = new AlarmManager(this);
+        pinManager = new PinManager(this);
         pinInput = findViewById(R.id.pin_input);
 
         Button btnStop = findViewById(R.id.btn_stop);
@@ -34,7 +32,7 @@ public class AlarmActivity extends Activity{
     private void checkPin(){
         String entered = pinInput.getText().toString().trim();
 
-        if (entered.equals(CORRECT_PIN)){
+        if (entered.equals(pinManager.getPin())){
             Intent stopIntent = new Intent(this, AntiTheftService.class);
             stopIntent.setAction("STOP_ALARM");
             startService(stopIntent);

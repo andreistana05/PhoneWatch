@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AntiTheftService">
+    android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/btn_toggle"
+        android:layout_marginBottom="24dp"
+        android:text="Mod anti-furt: DEZACTIVAT"
+        android:textSize="18sp"
+    />
+
+    <Button
+        android:id="@+id/btn_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Activeaza anti-furt"
+    />
+
+    <Button
+        android:id="@+id/btn_set_pin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_toggle"
+        android:layout_marginTop="16dp"
+        android:text="Seteaza cod PIN pentru deblocare"
+    />
 </RelativeLayout>

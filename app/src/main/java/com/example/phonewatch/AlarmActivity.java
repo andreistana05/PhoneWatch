@@ -34,7 +34,7 @@ public class AlarmActivity extends Activity{
 
         if (entered.equals(pinManager.getPin())){
             Intent stopIntent = new Intent(this, AntiTheftService.class);
-            stopIntent.setAction("STOP_ALARM");
+            stopIntent.setAction("STOP_MONITORING");
             startService(stopIntent);
             finish();
         } else {

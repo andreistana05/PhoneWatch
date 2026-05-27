@@ -1,8 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.PhoneWatch" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Main colors from logo -->
+        <item name="colorPrimary">@color/logo_teal</item>
+        <item name="colorPrimaryDark">@color/logo_dark_teal</item>
+        <item name="colorAccent">@color/logo_gold</item>
+
+        <!-- Background and surface colors -->
+        <item name="android:windowBackground">@color/logo_dark_teal</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+    <style name="RoundedCorners">
+        <item name="cornerSize">30dp</item>
     </style>
 
     <style name="Theme.PhoneWatch" parent="Base.Theme.PhoneWatch" />

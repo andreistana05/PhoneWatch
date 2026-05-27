@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Logo Colors -->
+    <color name="logo_dark_teal">#002329</color>
+    <color name="logo_teal">#00A3B1</color>
+    <color name="logo_gold">#FFB81C</color>
+
+    <!-- Theme mapping -->
+    <color name="colorPrimary">@color/logo_teal</color>
+    <color name="colorPrimaryDark">@color/logo_dark_teal</color>
+    <color name="colorAccent">@color/logo_gold</color>
 </resources>

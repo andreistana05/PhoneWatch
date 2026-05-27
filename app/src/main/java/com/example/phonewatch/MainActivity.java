@@ -67,14 +67,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        super.onStart();
-        IntentFilter filter = new IntentFilter(AntiTheftService.ACTION_STATE_CHANGED);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(stateReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
-        } else {
-            registerReceiver(stateReceiver, filter);
+        super.onStart();try {
+            IntentFilter filter = new IntentFilter(AntiTheftService.ACTION_STATE_CHANGED);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                registerReceiver(stateReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
+            } else {
+                registerReceiver(stateReceiver, filter);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        // Sync state in case it changed while stopped
+
+        // Sincronizăm starea butoanelor cu ce e salvat în memorie
         isMonitoring = pinManager.isMonitoring();
         updateUI();
     }

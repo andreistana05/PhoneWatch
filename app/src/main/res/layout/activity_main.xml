@@ -1,35 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="24dp"
+    android:background="@color/logo_dark_teal">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/logo"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/RoundedCorners"
+        android:contentDescription="PhoneWatch Logo" />
 
     <TextView
         android:id="@+id/tv_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/btn_toggle"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="32dp"
         android:text="Mod anti-furt: DEZACTIVAT"
-        android:textSize="18sp"
-    />
+        android:textColor="@color/logo_gold"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btn_toggle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Activeaza anti-furt"
-    />
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:text="Porneste anti-furt"
+        android:backgroundTint="@color/logo_teal"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btn_set_pin"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btn_toggle"
         android:layout_marginTop="16dp"
-        android:text="Seteaza cod PIN pentru deblocare"
-    />
-</RelativeLayout>
+        android:text="Seteaza cod PIN"
+        android:backgroundTint="@color/logo_dark_teal"
+        android:textColor="@color/logo_gold"
+        style="@style/Widget.Material3.Button.TextButton" />
+
+</LinearLayout>

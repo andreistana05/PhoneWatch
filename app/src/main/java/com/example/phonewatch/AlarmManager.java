@@ -1,5 +1,6 @@
 package com.example.phonewatch;
 
+import android.media.AudioAttributes;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -57,20 +58,45 @@ public class AlarmManager {
         );
     }
 
-    private void startSound(){
-        if (mediaPlayer != null)
-            mediaPlayer.release();
-        mediaPlayer = MediaPlayer.create(context, R.raw.alarm);
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
-        mediaPlayer.setLooping(true);
-        mediaPlayer.start();
+    private void startSound() {
+        stopSound();
+        try {
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                AudioAttributes aa = new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_ALARM)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                        .build();
+
+                mediaPlayer = MediaPlayer.create(context, R.raw.alarm, aa, audioManager.generateAudioSessionId());
+            } else {
+                mediaPlayer = MediaPlayer.create(context, R.raw.alarm);
+                if(mediaPlayer != null) {
+                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+                }
+            }
+            if(mediaPlayer != null) {
+                mediaPlayer.setLooping(true);
+                mediaPlayer.start();
+            } else {
+                android.util.Log.e("AlarmManager", "Nu s-a putut crea MediaPlayer");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void stopSound(){
-        if(mediaPlayer != null){
-            mediaPlayer.stop();
-            mediaPlayer.release();
-            mediaPlayer = null;
+    private void stopSound() {
+        if(mediaPlayer != null) {
+            try {
+                if(mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                }
+            } catch (Exception e) {
+
+            } finally {
+                mediaPlayer.release();
+                mediaPlayer = null;
+            }
         }
     }
 
